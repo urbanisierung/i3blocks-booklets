@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source /home/adam/.config/envvars/github.env
+
+ALL_PRS=$(/snap/bin/hub -C $BLOCK_INSTANCE pr list | wc -l)
+PRS=$(/snap/bin/hub -C $BLOCK_INSTANCE pr list  | grep -v WIP | grep -v HOLD | wc -l)
+
+echo "${PRS}/${ALL_PRS}"
+
+if [ ${PRS} != "0" ]; then
+  exit 33
+fi
